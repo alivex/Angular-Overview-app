@@ -1,0 +1,36 @@
+<h2>Active Jobs</h2>
+<div id="jobs" class="row view-group">
+    <div *ngFor="let job of jobs | async "
+    [class.selected]="job === selectedJob"
+    (click)="onSelect(job)" class="item job col-xs-4 col-lg-4">
+      <div class="thumbnail card job-card">
+        <div class="img-event">
+            <img class="group list-group-image img-fluid" src="{{job.thumbnail}}" alt="" />
+        </div>
+        <div class="caption card-body">
+            <h4 class="group card-title inner list-group-item-heading">
+                {{job.title}}</h4>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <p class="lead">
+                        {{job.zip_code}}, {{job.city}}</p>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                  <span class="badge">ID: {{job.id}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <span class="badge">Created at: {{job.created_at | date:'short'}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                  <span class="badge">Ends at: {{job.end_date | date:'short'}}</span>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+<app-job-detail [job]="selectedJob"></app-job-detail>

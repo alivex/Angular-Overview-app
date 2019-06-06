@@ -1,0 +1,4 @@
+.card.job-card:nth-of-type(odd):hover,.card.job-card:hover
+{
+    background: #428bca;
+}

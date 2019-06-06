@@ -1,31 +1,75 @@
-import { TestBed, async } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+
 import { AppComponent } from './app.component';
 
-describe('AppComponent', () => {
-  beforeEach(async(() => {
+@Component({selector: 'app-job-list', template: ''})
+class JobsListStubComponent {}
+
+
+let app: AppComponent;
+let de: DebugElement;
+let fixture: ComponentFixture<AppComponent>;
+
+describe('AppComponent from CLI', () => {
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        JobsListStubComponent
       ],
-    }).compileComponents();
-  }));
+    });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    fixture = TestBed.createComponent(AppComponent);
+    app = fixture.componentInstance;
+    de = fixture.debugElement;
   });
 
-  it(`should have as title 'Job-Overview'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
+  it('should create the app', () => {
+    expect(app).toBeDefined();
+  });
+
+  it(`should have as title 'app'`, () => {
     expect(app.title).toEqual('Job-Overview');
   });
 
-  it('should render title in a h1 tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+  it('should render title in an h1 tag', () => {
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to Job-Overview!');
+    expect(de.nativeElement.querySelector('h1').textContent)
+      .toContain('Job-Overview');
   });
 });
+
+describe('AppComponent & TestModule', () => {
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        AppComponent,
+        JobsListStubComponent
+      ]
+    })
+    .compileComponents().then(() => {
+      fixture = TestBed.createComponent(AppComponent);
+      app    = fixture.componentInstance;
+    });
+  }));
+  
+  tests();
+  
+});
+
+function tests() {
+
+  beforeEach(() => {
+    fixture.detectChanges(); // trigger initial data binding
+
+  });
+
+  it('can instantiate the component', () => {
+    expect(app).not.toBeNull();
+  });
+
+}

@@ -1,0 +1,26 @@
+<div *ngIf="job">  
+  <div id="job-description" class="row">
+      <div class="col-12 col-md-8 col-lg-8">
+        <div class="jumbotron">
+            <h2 class="h1-responsive">{{job.zip_code}}, {{job.city}}</h2>
+            <p class="lead"><span class="title">{{job.title}}</span></p>
+            <hr class="my-2">
+            <p>{{job.description}}
+            </p>
+            <hr class="my-2">
+            <p class="lead"><span class="badge">Messages total: {{job.counter.messages_total }}</span> - <span class="badge">Messages Unread: {{job.counter.messages_unread }}</span></p>
+            <p class="lead"><span class="badge">Created at: {{job.created_at | date:'short'}}</span> - <span class="badge">Ends at: {{job.end_date | date:'short'}}</span></p>
+            
+            <hr class="my-2">
+            <div *ngIf="(job.attachments)">
+              <h2 class="h1-responsive">Job Attachments:</h2>
+              <div *ngFor="let pic of job.attachments">
+                <div class="img-event">
+                  <img class="group list-group-image img-fluid" src="{{pic}}" alt="" />
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
